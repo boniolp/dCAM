@@ -45,4 +45,19 @@ The code is divided as follows:
   - [explanation/](https://github.com/boniolp/dCAM/tree/main/experiments/explanation/): scripts in order to reproduce our explanation results.
   - [execution_time/](https://github.com/boniolp/dCAM/tree/main/experiments/execution_time/): scripts in order to reproduce our execution_time results.
 
+- [Results_overview.ipynb](https://github.com/boniolp/dCAM/blob/main/Results_overview.ipynb): Notebook containing all the informations and the procedures to run the [experiments/](https://github.com/boniolp/dCAM/tree/main/experiments) scripts and generate the figures in our [paper](https://www.researchgate.net/publication/361416963_dCAM_Dimension-wise_Class_Activation_Map_for_Explaining_Multivariate_Data_Series_Classification).
+
+## Prerequisites
+
+All python packages needed are listed in [requirements.txt](https://github.com/boniolp/dCAM/blob/main/requirements.txt) file and can be installed simply using the pip command: 
+
+'''(bash) 
+pip install -r requirements.txt
+''' 
+
+[Jupyter notebook](https://jupyter.org/install) should be installed. To do so, please run the following command:
+
+'''(bash) 
+pip install notebook
+''' 
 

@@ -65,11 +65,11 @@ Overall, the required python packages are listed as follows:
 * [numpy](http://www.numpy.org/)
 * [pandas](https://pandas.pydata.org/)
 * [sklearn](http://scikit-learn.org/stable/)
-* [matplotlib](https://matplotlib.org/) 
 * [pytorch](https://pytorch.org/)
 * [tqdm](https://github.com/tqdm/tqdm)
-* [torchsummary](https://github.com/sksq96/pytorch-summary)
-* [scipy](https://www.scipy.org/) 
+* [matplotlib](https://matplotlib.org/) (For the jupyter notebooks only)
+* [torchsummary](https://github.com/sksq96/pytorch-summary) (For the jupyter notebooks only)
+* [scipy](https://www.scipy.org/) (For the jupyter notebooks only)
 
 ## Reference
 

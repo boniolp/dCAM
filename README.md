@@ -61,3 +61,12 @@ pip install -r requirements.txt
 pip install notebook
 ``` 
 
+Overall, the required python packages are listed as follows:
+* [numpy](http://www.numpy.org/)
+* [pandas](https://pandas.pydata.org/)
+* [sklearn](http://scikit-learn.org/stable/)
+* [matplotlib](https://matplotlib.org/) 
+* [pytorch](https://pytorch.org/)
+* [tqdm](https://github.com/tqdm/tqdm)
+
+

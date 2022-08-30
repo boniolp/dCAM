@@ -68,6 +68,7 @@ Overall, the required python packages are listed as follows:
 * [matplotlib](https://matplotlib.org/) 
 * [pytorch](https://pytorch.org/)
 * [tqdm](https://github.com/tqdm/tqdm)
+* [torchsummary](https://github.com/sksq96/pytorch-summary)
 
 ## Reference
 

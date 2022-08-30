@@ -38,7 +38,7 @@ The code is divided as follows:
 
 - The [examples/](https://github.com/boniolp/dCAM/tree/main/examples) folder that contains:
   - [Synthetic_experiment-CAM.ipynb](https://github.com/boniolp/dCAM/tree/main/examples/Synthetic_experiment-CAM.ipynb): An example on how to use CNN-based models and the Class Activation Map.
-  - [Synthetic_experiment-DCAM.ipynb](https://github.com/boniolp/dCAM/tree/main/examples/Synthetic_experiment-DCAM.ipynb): An example on how to use dCNN-based models and the dCAM.
+  - [Synthetic_experiment_DCAM.ipynb](https://github.com/boniolp/dCAM/tree/main/examples/Synthetic_experiment_DCAM.ipynb): An example on how to use dCNN-based models and the dCAM.
 
 - The [experiments/](https://github.com/boniolp/dCAM/tree/main/experiments) folder that contains:
   - [classification/](https://github.com/boniolp/dCAM/tree/main/experiments/classification): scripts in order to reproduce our classification results.

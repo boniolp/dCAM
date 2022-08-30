@@ -17,7 +17,7 @@ The data used in this project comes from two sources:
 ## Code 
 The code is divided as follows: 
 - The [src/](https://github.com/boniolp/dCAM/tree/main/src) folder that contains:
-  - models/CNN_models.py:
+  - [CNN_models.py](https://github.com/boniolp/dCAM/blob/main/src/models/CNN_models.py):
     - CNN architecture (class ConvNet)
     - dCNN/cCNN architecture (class ConvNet2D)
     - ResNet architecture (class ResNet)
@@ -25,24 +25,24 @@ The code is divided as follows:
     - Inception Time architecture (class inceptiontime)
     - dInception Time/cInception Time architecture (class dinceptiontime)
     - CNN-MTEX architecture (class ConvNetMTEX)
-  - models/RNN_models.py:
+  - [RNN_models.py](https://github.com/boniolp/dCAM/blob/main/src/models/RNN_models.py):
     - LSTM architecture (class LSTMClassifier)
     - RNN architecture (class RNNClassifier)
     - GRU architecture (class GRUClassifier)
 
-  - the explanation/:
-    - CAM code (class CAM)
-    - cCAM code (class cCAM)
-    - dCAM code (class DCAM)
-    - grad-CAM used for CNN-MTEX (class GradCAM)
+  - the [explanation/](https://github.com/boniolp/dCAM/blob/main/src/explanation/) folder:
+    - [CAM](https://github.com/boniolp/dCAM/blob/main/src/explanation/CAM.py) code (class CAM)
+    - [cCAM](https://github.com/boniolp/dCAM/blob/main/src/explanation/cCAM.py) code (class cCAM)
+    - [dCAM](https://github.com/boniolp/dCAM/blob/main/src/explanation/DCAM.py) code (class DCAM)
+    - [grad-CAM](https://github.com/boniolp/dCAM/blob/main/src/explanation/grad_cam_mtex.py) code used for CNN-MTEX (class GradCAM)
 
 - The [examples/](https://github.com/boniolp/dCAM/tree/main/examples) folder that contains:
-  - Synthetic_experiment-CAM.ipynb: An example on how to use CNN-based models and the Class Activation Map.
-  - Synthetic_experiment-DCAM.ipynb: An example on how to use dCNN-based models and the dCAM.
+  - [Synthetic_experiment-CAM.ipynb](https://github.com/boniolp/dCAM/tree/main/examples/Synthetic_experiment-CAM.ipynb): An example on how to use CNN-based models and the Class Activation Map.
+  - [Synthetic_experiment-DCAM.ipynb](https://github.com/boniolp/dCAM/tree/main/examples/Synthetic_experiment-DCAM.ipynb): An example on how to use dCNN-based models and the dCAM.
 
 - The [experiments/](https://github.com/boniolp/dCAM/tree/main/experiments) folder that contains:
-  - classification/: scripts in order to reproduce our classification results.
-  - explanation/: scripts in order to reproduce our explanation results.
-  - execution-time/: scripts in order to reproduce our execution_time results.
+  - [classification/](https://github.com/boniolp/dCAM/tree/main/experiments/classification): scripts in order to reproduce our classification results.
+  - [explanation/](https://github.com/boniolp/dCAM/tree/main/experiments/explanation/): scripts in order to reproduce our explanation results.
+  - [execution_time/](https://github.com/boniolp/dCAM/tree/main/experiments/execution_time/): scripts in order to reproduce our execution_time results.
 
 

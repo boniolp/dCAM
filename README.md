@@ -1,10 +1,10 @@
-# d-CAM : Dimension-wise Class Activation Map for Explaining Multivariate Time Series Classification #
+# d-CAM : Dimension-wise Class Activation Map for Explaining Multivariate Time Series Classification
 
 <p align="center">
 <img src="ressources/intro_figure.png" alt="drawing" width="400"/>
 </p>
 
-### Class Activation Map and multivariate time series classification ###
+## Abstract
 
 Data series classification is an important and challenging problem in data science. Explaining the classification decisions by finding the discriminant parts of the input that led the algorithm to some decision is a real need in many applications. Convolutional neural networks perform well for the data series classification task; though,the explanations provided by this type of algorithms are poor for the specific case of multivariate data series. Solving this important limitation is a significant challenge. We propose a novel method that addresses the above challenge by highlighting both the temporal and dimensional discriminant information. Our contribution is two-fold: we first describe a new convolutional architecture that enables the comparison of dimensions; then, we propose a novel method that returns dCAM, a Dimension-wise ClassActivation Map specifically designed for multivariate time series. 
 

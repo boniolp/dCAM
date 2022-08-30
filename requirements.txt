@@ -3,3 +3,4 @@ torch==1.7.1
 pandas==1.4.1
 numpy==1.22.3
 scikit_learn==1.1.2
+matplotlib==3.5.1

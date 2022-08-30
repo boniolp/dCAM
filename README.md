@@ -51,13 +51,13 @@ The code is divided as follows:
 
 All python packages needed are listed in [requirements.txt](https://github.com/boniolp/dCAM/blob/main/requirements.txt) file and can be installed simply using the pip command: 
 
-'''(bash) 
+```(bash) 
 pip install -r requirements.txt
-''' 
+``` 
 
 [Jupyter notebook](https://jupyter.org/install) should be installed. To do so, please run the following command:
 
-'''(bash) 
+```(bash) 
 pip install notebook
-''' 
+``` 
 

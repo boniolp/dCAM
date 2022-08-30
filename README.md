@@ -69,4 +69,30 @@ Overall, the required python packages are listed as follows:
 * [pytorch](https://pytorch.org/)
 * [tqdm](https://github.com/tqdm/tqdm)
 
+## Reference
 
+If you re-use this work, please cite:
+
+```
+@inproceedings{DBLP:conf/sigmod/BoniolMRP22,
+  author    = {Paul Boniol and
+               Mohammed Meftah and
+               Emmanuel Remy and
+               Themis Palpanas},
+  editor    = {Zachary Ives and
+               Angela Bonifati and
+               Amr El Abbadi},
+  title     = {dCAM: Dimension-wise Class Activation Map for Explaining Multivariate
+               Data Series Classification},
+  booktitle = {{SIGMOD} '22: International Conference on Management of Data, Philadelphia,
+               PA, USA, June 12 - 17, 2022},
+  pages     = {1175--1189},
+  publisher = {{ACM}},
+  year      = {2022},
+  url       = {https://doi.org/10.1145/3514221.3526183},
+  doi       = {10.1145/3514221.3526183},
+  timestamp = {Tue, 14 Jun 2022 18:31:24 +0200},
+  biburl    = {https://dblp.org/rec/conf/sigmod/BoniolMRP22.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```

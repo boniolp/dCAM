@@ -51,16 +51,16 @@ def gen_cube(instance):
 	return result 
 
 def compute_AUC(dcam,gt):
-    to_evaluate =[]
-    gt_conc = []
-    for i in range(len(dcam)):
-            to_evaluate += list(dcam[i])
-            gt_conc += list(gt[i])
-    to_evaluate = (np.array(to_evaluate) - min(to_evaluate))/(max(to_evaluate) - min(to_evaluate))
+	to_evaluate =[]
+	gt_conc = []
+	for i in range(len(dcam)):
+			to_evaluate += list(dcam[i])
+			gt_conc += list(gt[i])
+	to_evaluate = (np.array(to_evaluate) - min(to_evaluate))/(max(to_evaluate) - min(to_evaluate))
 
-    precision, recall, thresholds = precision_recall_curve(gt_conc,to_evaluate)
-    auc_PR = auc(recall,precision)
-    return auc_PR#roc_auc_score(gt_conc,to_evaluate)
+	precision, recall, thresholds = precision_recall_curve(gt_conc,to_evaluate)
+	auc_PR = auc(recall,precision)
+	return auc_PR#roc_auc_score(gt_conc,to_evaluate)
 
 ##### MODEL PREPROCESSING ######
 # - Scripts related to models preparation and oarameter preprocessing
@@ -154,7 +154,7 @@ def process_dataset(dataset_name,train_test_r,type_input='baseline'):
 														test_size=1-train_test_r,random_state=11081994)
 
 	all_class = [elem[0] for elem in all_class_test_tmp]
-    all_class_gt = [elem[1] for elem in all_class_test_tmp]
+	all_class_gt = [elem[1] for elem in all_class_test_tmp]
 
 
 
@@ -186,109 +186,109 @@ def exec_model(model_name,type_input,dataset_name,parameters):
 	
 	model_name='../models/{}_{}'.format(model_name,dataset_name.split('/')[-1].strip('.pickle'))
 	model = torch.load(model_name).to(device)
-    model = model.eval()
+	model = model.eval()
 	all_score = []
 	count_instance = 0    
-    
-    for index_instance in range(len(dict_dataset['all_class'])):
-    	instance = dict_dataset['all_class'][index_instance]
-        label_instance = dict_dataset['label_test'][index_instance]
-        if count_instance == 50:
-            break
-        if label_instance == 1:
-            count_instance += 1
+	
+	for index_instance in range(len(dict_dataset['all_class'])):
+		instance = dict_dataset['all_class'][index_instance]
+		label_instance = dict_dataset['label_test'][index_instance]
+		if count_instance == 50:
+			break
+		if label_instance == 1:
+			count_instance += 1
 
-	        if model_name == 'mtex':
-	        	instance_to_try = Variable(
-                        torch.tensor(
-                            np.array(instance).reshape(
-                                (1,1,original_dim,original_length),
-                                )
-                            ).float().to(device),requires_grad=True
-                        )
-                gcam = GradCAM(model=model,candidate_layers='layer2')
-                pred,ids = gcam.forward(instance_to_try)
-                gcam.backward(ids=ids)
-                regions = gcam.generate(target_layer='layer2')
+			if model_name == 'mtex':
+				instance_to_try = Variable(
+						torch.tensor(
+							np.array(instance).reshape(
+								(1,1,original_dim,original_length),
+								)
+							).float().to(device),requires_grad=True
+						)
+				gcam = GradCAM(model=model,candidate_layers='layer2')
+				pred,ids = gcam.forward(instance_to_try)
+				gcam.backward(ids=ids)
+				regions = gcam.generate(target_layer='layer2')
 
-                if np.isnan(regions.cpu().numpy()[0][0]).any(0).any(0):
-                    count_instance -= 1
-                    continue
-                
-                explanation = regions.cpu().numpy()[0][0]
+				if np.isnan(regions.cpu().numpy()[0][0]).any(0).any(0):
+					count_instance -= 1
+					continue
+				
+				explanation = regions.cpu().numpy()[0][0]
 
-	        elif model_name == 'resnet':
-	        	last_conv_layer = model._modules['layers'][2]
-                fc_layer_name = model._modules['final']
+			elif model_name == 'resnet':
+				last_conv_layer = model._modules['layers'][2]
+				fc_layer_name = model._modules['final']
 
-                DCAM_m = CAM(model,
-                        device,
-                        last_conv_layer=last_conv_layer,
-                        fc_layer_name=fc_layer_name)
+				DCAM_m = CAM(model,
+						device,
+						last_conv_layer=last_conv_layer,
+						fc_layer_name=fc_layer_name)
 
-                dcam = DCAM_m.run(instance=instance,
-                        label_instance=label_instance)
-                if dcam is None:
-                    explanation = []
-                    for i in range(len(instance)):
-                        explanation.append([random.uniform(0,1) for val_rand in range(len(instance[i]))])
-                else:
-                    explanation = []
-                    for i in range(len(instance)):
-                        explanation.append(dcam)
-	        
-	        elif model_name == 'cresnet':
-	        	last_conv_layer = model._modules['layers'][2]
-                fc_layer_name = model._modules['final']
+				dcam = DCAM_m.run(instance=instance,
+						label_instance=label_instance)
+				if dcam is None:
+					explanation = []
+					for i in range(len(instance)):
+						explanation.append([random.uniform(0,1) for val_rand in range(len(instance[i]))])
+				else:
+					explanation = []
+					for i in range(len(instance)):
+						explanation.append(dcam)
+			
+			elif model_name == 'cresnet':
+				last_conv_layer = model._modules['layers'][2]
+				fc_layer_name = model._modules['final']
 
-                DCAM_m = cCAM(model,
-                        device,
-                        last_conv_layer=last_conv_layer,
-                        fc_layer_name=fc_layer_name)
+				DCAM_m = cCAM(model,
+						device,
+						last_conv_layer=last_conv_layer,
+						fc_layer_name=fc_layer_name)
 
-                dcam = DCAM_m.run(instance=gen_col(instance),
-                        label_instance=label_instance)
+				dcam = DCAM_m.run(instance=gen_col(instance),
+						label_instance=label_instance)
 
-                if dcam is None:
-                    explanation = []
-                    for i in range(len(instance)):
-                        explanation.append([random.uniform(0,1) for val_rand in range(len(instance[i]))])
-                else:
-                    explanation = []
-                    for i in range(len(instance)):
-                        explanation.append(dcam[i])
-	        
-	        else:
-		        if model_name == 'dcnn':
-		        	last_conv_layer = model._modules.get('layer3')
-	                fc_layer_name = model._modules.get('fc1')
+				if dcam is None:
+					explanation = []
+					for i in range(len(instance)):
+						explanation.append([random.uniform(0,1) for val_rand in range(len(instance[i]))])
+				else:
+					explanation = []
+					for i in range(len(instance)):
+						explanation.append(dcam[i])
+			
+			else:
+				if model_name == 'dcnn':
+					last_conv_layer = model._modules.get('layer3')
+					fc_layer_name = model._modules.get('fc1')
 
-	            elif model_name == 'dresnet':
-	            	last_conv_layer = model._modules['layers'][2]
-	                fc_layer_name = model._modules['final']
+				elif model_name == 'dresnet':
+					last_conv_layer = model._modules['layers'][2]
+					fc_layer_name = model._modules['final']
 
-	           	elif model_name == 'dinception':
-	           		last_conv_layer = model._modules['blocks'][2]
-                    fc_layer_name = model._modules['linear']
+				elif model_name == 'dinception':
+					last_conv_layer = model._modules['blocks'][2]
+					fc_layer_name = model._modules['linear']
 
-            	DCAM_m = DCAM(model,
-                    device,
-                    last_conv_layer=last_conv_layer,
-                    fc_layer_name=fc_layer_name)
+				DCAM_m = DCAM(model,
+					device,
+					last_conv_layer=last_conv_layer,
+					fc_layer_name=fc_layer_name)
 
-            	try:
-                    explanation,nb_permutation_success = DCAM_m.run(instance=instance,
-                        nb_permutation=100,
-                        label_instance=label_instance)
-                except:
-                    explanation = []
-                    for i in range(len(instance)):
-                        explanation.append([random.uniform(0,1) for val_rand in range(len(instance[i]))])
-                    nb_permutation_success = 0
+				try:
+					explanation,nb_permutation_success = DCAM_m.run(instance=instance,
+						nb_permutation=100,
+						label_instance=label_instance)
+				except:
+					explanation = []
+					for i in range(len(instance)):
+						explanation.append([random.uniform(0,1) for val_rand in range(len(instance[i]))])
+					nb_permutation_success = 0
 
-	        gt = dict_dataset['all_class_gt'][index_instance]
-            score = compute_AUC(explanation,gt)
-            all_score.append(score)
+			gt = dict_dataset['all_class_gt'][index_instance]
+			score = compute_AUC(explanation,gt)
+			all_score.append(score)
 
 	file_result = "../results_explanation/log/{}_{}.txt".format(model_name,dataset_name.split('/')[-1].strip('.pickle'))
 

@@ -1,6 +1,6 @@
 # d-CAM : Dimension-wise Class Activation Map for Explaining Multivariate Time Series Classification #
 
-![dcam example](ressources/intro_figure.pdf)
+![dcam example](ressources/intro_figure.png)
 
 ### Class Activation Map and multivariate time series classification ###
 

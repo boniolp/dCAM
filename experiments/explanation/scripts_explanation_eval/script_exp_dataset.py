@@ -171,7 +171,7 @@ def process_dataset(dataset_name,train_test_r,type_input='baseline'):
 	return dict_dataset
 
 
-##### DATASET PREPROCESSING ######
+##### MODEL EXEC ######
 # - Scripts executing a given model on a given dataset
 # - parameters is a dictionary containing the following items:
 #     - train_test_r: the split ratio between the train and the test dataset 

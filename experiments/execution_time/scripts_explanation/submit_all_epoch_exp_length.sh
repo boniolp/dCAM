@@ -1,0 +1,4 @@
+#!/bin/bash 
+sbatch auto_script/submit_dcnn_synth_ShapesAll_type1_nbdim_10_epoch_length.sh
+sbatch auto_script/submit_dresnet_synth_ShapesAll_type1_nbdim_10_epoch_length.sh
+sbatch auto_script/submit_dinception_synth_ShapesAll_type1_nbdim_10_epoch_length.sh

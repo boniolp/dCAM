@@ -9,9 +9,10 @@ from sklearn.model_selection import train_test_split
 
 import sys
 sys.path.append('../../../src/models')
-
+sys.path.append('../../../src/explanation')
 from CNN_models import *
 from RNN_models import *
+from DCAM import *
 
 from tqdm import tqdm
 import pickle
@@ -24,13 +25,7 @@ import pickle
 def generate_list_instance(x,length=100):
 	res = []
 	for i in range(len(x)):
-		if length > len(x[i]):
-			tmp = []
-			while length > len(tmp):
-				tmp = tmp + list(x[i])
-			res.append(list(tmp[:length]))
-		else:
-			res.append(list(x[i][:length]))
+		res.append(list(x[i]))
 	return np.array(res)
 
 # Generate column-wised input for c-based models (i.e., cCNN, cResNet, and cInceptionTime)
@@ -53,7 +48,7 @@ def gen_cube(instance):
 # - Scripts related to models preparation and oarameter preprocessing
 
 def gen_model(arg,original_length,original_dim,num_classes):
-		
+	
 	#Baselines
 	if arg == 'mtex':
 		modelarch = ConvNetMTEX(original_length,original_dim,1,num_classes).to(device)
@@ -66,8 +61,8 @@ def gen_model(arg,original_length,original_dim,num_classes):
 		return ModelCNN(modelarch,device)
 	elif arg == 'inception':
 		modelarch = InceptionModel(num_blocks=3, in_channels=original_dim, out_channels=32,
-														bottleneck_channels=32, kernel_sizes=[10,20,40],
-														use_residuals=True, num_pred_classes=num_classes).to(device)
+								bottleneck_channels=32, kernel_sizes=[10,20,40],
+								use_residuals=True, num_pred_classes=num_classes).to(device)
 		return ModelCNN(modelarch,device)
 
 	#RNN Baselines
@@ -92,8 +87,8 @@ def gen_model(arg,original_length,original_dim,num_classes):
 		return ModelCNN(modelarch,device)
 	elif arg == 'cinception':
 		modelarch = dInceptionModel(num_blocks=3, in_channels=1, out_channels=64,
-														bottleneck_channels=64, kernel_sizes=[10,20,40],
-														use_residuals=True, num_pred_classes=num_classes).to(device)
+								bottleneck_channels=64, kernel_sizes=[10,20,40],
+								use_residuals=True, num_pred_classes=num_classes).to(device)
 		return ModelCNN(modelarch,device)
 
 	#d-Baselines
@@ -105,19 +100,19 @@ def gen_model(arg,original_length,original_dim,num_classes):
 		return ModelCNN(modelarch,device)
 	elif arg == 'dinception':
 		modelarch = dInceptionModel(num_blocks=3, in_channels=original_dim, out_channels=64,
-														bottleneck_channels=64, kernel_sizes=[10,20,40],
-														use_residuals=True, num_pred_classes=num_classes).to(device)
+								bottleneck_channels=64, kernel_sizes=[10,20,40],
+								use_residuals=True, num_pred_classes=num_classes).to(device)
 		return ModelCNN(modelarch,device)
 
 
 ##### DATASET PREPROCESSING ######
 # - Scripts generating the train and the test dataset and the relevant information from a specific dataset
 
-def process_dataset(dataset_name,train_test_r,batch_size,type_input='baseline',target_length=100):
-		
+def process_dataset(dataset_name,train_test_r,batch_size,type_input='baseline'):
+	
 	with open(dataset_name,'rb') as f:
 		X,y,X_gt = pickle.load(f)
-			
+		
 	dict_label = {}
 	count = 0
 	for val in set(y.values):
@@ -127,7 +122,7 @@ def process_dataset(dataset_name,train_test_r,batch_size,type_input='baseline',t
 	all_class_all = []
 	all_label = []
 	for i in range(len(X)):
-		all_class_all.append(generate_list_instance(X.values[i],target_length))
+		all_class_all.append(generate_list_instance(X.values[i]))
 		all_label.append(dict_label[y.values[i]])
 
 
@@ -140,40 +135,10 @@ def process_dataset(dataset_name,train_test_r,batch_size,type_input='baseline',t
 														stratify=all_label, 
 														test_size=1-train_test_r,random_state=11081994)
 
-	#1D-based models in which all dimensions are stored in channels
-	if type_input == 'baseline':
-		#Generate train dataloader
-		dataset_mat = TSDataset(all_class,label)
-		dataloader_cl1 = data.DataLoader(dataset_mat, batch_size=batch_size, shuffle=True)
-		
-		#Generate test dataloader
-		dataset_mat_test = TSDataset(all_class_test,label_test)
-		dataloader_cl1_test = data.DataLoader(dataset_mat_test, batch_size=1, shuffle=True)
-
-	#2D-based models in which all dimensions are stored in different columns with only one channel.
-	elif type_input == 'c':
-		x = np.array([gen_col(acl) for acl in all_class])
-		dataset_mat = TSDataset(x,label)
-		dataloader_cl1 = data.DataLoader(dataset_mat, batch_size=batch_size, shuffle=True)
-
-		x = np.array([gen_col(acl) for acl in all_class_test])
-		dataset_mat_test = TSDataset(x,label_test)
-		dataloader_cl1_test = data.DataLoader(dataset_mat_test, batch_size=1, shuffle=True)
-
-	#2D-based models in which several permutations of all pdimensions are stored in different columns.
-	elif type_input == 'd':
-		x = np.array([gen_cube(acl) for acl in all_class])
-		dataset_mat = TSDataset(x,label)
-		dataloader_cl1 = data.DataLoader(dataset_mat, batch_size=batch_size, shuffle=True)
-
-		x = np.array([gen_cube(acl) for acl in all_class_test])
-		dataset_mat_test = TSDataset(x,label_test)
-		dataloader_cl1_test = data.DataLoader(dataset_mat_test, batch_size=1, shuffle=True)
-
-	
+       
 	dict_dataset = {
-		'train_loader' : dataloader_cl1,
-		'test_loader'  : dataloader_cl1_test,
+		'all_class' : all_class_test,
+		'label_test'  : label_test,
 		'ts_length'    : original_length,
 		'nb_classes'   : num_classes,
 		'nb_dim'       : original_dim,
@@ -185,50 +150,67 @@ def process_dataset(dataset_name,train_test_r,batch_size,type_input='baseline',t
 
 ##### MODEL EXEC ######
 # - Scripts executing a given model on a given dataset
-# - parameters is a dictionary containing the following items:
-#     - train_test_r: the split ratio between the train and the test dataset 
-#     - batch_size: batch size
-#     - nb_epoch: number of epoches
-#     - nb_repeat_iteration: number of time the training is repeated.
-#     - The average over the differnt iteration is returned.
-
-def exec_model(model_name,type_input,dataset_name,parameters,target_length):
-		
+def exec_model(model_name,type_input,dataset_name,parameters):
+	
 	dict_dataset = process_dataset(
 		dataset_name,
 		parameters['train_test_r'],
 		parameters['batch_size'],
-		type_input,target_length)
+		type_input)     
 
 	all_time_epoch  = []
 	for iteration in range(parameters['nb_repeat_iteration']):
-			
-		model = gen_model(
-			model_name,
-			dict_dataset['ts_length'],
-			dict_dataset['nb_dim'],
-			dict_dataset['nb_classes'])
 		
-		#We save the model and train longer for the dCAM execution time experiment
-		model.train(
-			num_epochs=parameters['nb_epoch'],
-			dataloader_cl1=dict_dataset['train_loader'],
-			dataloader_cl1_test=dict_dataset['test_loader'],
-			model_name='../model/{}_{}_{}'.format(model_name,dataset_name.split('/')[-1].strip('.pickle'),target_length),
-			verbose=True)
+		# We load the molel trained in the explanation evaluation experiment
+		model_name_load = '../../explanation/model/{}_{}'.format(model_name,dataset_name.split('/')[-1].strip('.pickle'))
+		model = torch.load(model_name_load).to(device)
+		model = model.eval()
+		count_instance = 0
+		all_time = []
+		for index_instance in range(len(dict_dataset['all_class'])):
+			instance = dict_dataset['all_class'][index_instance]
+			label_instance = dict_dataset['label_test'][index_instance]
+			if count_instance == 10:
+				break
+			if label_instance == 1:
+		    
+				if model_name == 'dcnn':
+					last_conv_layer = model._modules.get('layer3')
+					fc_layer_name = model._modules.get('fc1')
+
+				elif model_name == 'dresnet':
+					last_conv_layer = model._modules['layers'][2]
+					fc_layer_name = model._modules['final']
+
+				elif model_name == 'dinception':
+					last_conv_layer = model._modules['blocks'][2]
+					fc_layer_name = model._modules['linear']
+
+				DCAM_m = DCAM(model,
+					device,
+					last_conv_layer=last_conv_layer,
+					fc_layer_name=fc_layer_name)
+
+				try:
+					start_time = time.time()
+					explanation,nb_permutation_success = DCAM_m.run(instance=instance,
+							nb_permutation=100,
+							label_instance=label_instance)
+					end_time = time.time()
+					time_dcam = end_time - start_time
+					all_time.append(time_dcam)
+					count_instance += 1
+				except:
+					print('failed dcam')
+
 		
-		# Store the best accuracy on the test dataset and delete the model
-		all_time_epoch.append(model.training_time_epoch)
-		del model
-		# Uncomment this line of used with GPU
-		#torch.cuda.empty_cache()
 
 	
 	
-	file_result = "../results_epoch/log_length/{}_{}_{}.txt".format(model_name,dataset_name.split('/')[-1].strip('.pickle'),target_length)
+	file_result = "../results_explanation/log_dim/{}_{}_{}.txt".format(model_name,dataset_name.split('/')[-1].strip('.pickle'),dict_dataset['nb_dim'])
 
 	with open(file_result ,"w") as f:
-		f.write("{}-{}".format(np.mean(all_time_epoch),np.std(all_time_epoch)))
+		f.write("{}-{}".format(np.mean(all_time),np.std(all_time)))
 
 
 
@@ -248,7 +230,7 @@ if __name__ == '__main__':
 	parameters['nb_repeat_iteration'] = int(sys.argv[5])
 	
 	device = 'cuda'
-	for target_length in [10,20,50,100,200,500,1000,5000,10000]:
-		exec_model(model_name,type_input,dataset_name,parameters,target_length)
+	
+	exec_model(model_name,type_input,dataset_name,parameters)
 
 

@@ -11,13 +11,6 @@ if __name__ == '__main__':
 	]
 	
 	model_names = [
-		('mtex','c'),
-		('cnn','baseline'),
-		('inception','baseline'),
-		('resnet','baseline'),
-		('cresnet','c'),
-		('ccnn','c'),
-		('cinception','c'),
 		('dcnn','d'),
 		('dresnet','d'),
 		('dinception','d'),
@@ -33,20 +26,11 @@ if __name__ == '__main__':
 			
 			device='cuda'
 			
-			# Parameter in papers and for the results depicted in the paper
-			#parameters = {
-			#       'train_test_r': 0.80,
-			#       'batch_size': 32,
-			#       'nb_epoch': 1000,
-			#       'nb_repeat_iteration': 10
-			#}
-
-			# Parameter to test the code
 			parameters = {
 				'train_test_r': 0.80,
 				'batch_size': 4,
-				'nb_epoch': 50,
-				'nb_repeat_iteration': 5
+				'nb_epoch': 10,
+				'nb_repeat_iteration': 1
 			}
 
 
@@ -56,7 +40,7 @@ if __name__ == '__main__':
 				
 				with open("submit_all_epoch_exp_length.sh",'a') as f:
 					f.write("sbatch {}\n".format(submit_name))
-				
+					
 				count += 1
 				with open(submit_name,'w') as f:
 					script_name = 'script_exp_dataset_length.py {} {} {} {} {} {} {}'.format(model_name,type_input,dataset_name,parameters['nb_epoch'],parameters['nb_repeat_iteration'], parameters['batch_size'], parameters['train_test_r'])
@@ -65,6 +49,9 @@ if __name__ == '__main__':
 	except KeyboardInterrupt:
 		print('interuption...')
 
+
+
+						
 
 
 

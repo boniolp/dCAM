@@ -31,7 +31,7 @@ if __name__ == '__main__':
 				
 			dataset_name = '../../../data/synthetic/{}'.format(name)
 			
-			device='cuda'
+			
 			
 			# Parameter in papers and for the results depicted in the paper
 			#parameters = {

@@ -2,7 +2,6 @@ import numpy as np
 import pandas as pd
 import os
 from random import randint
-from idr_pytools import gpu_jobs_submitter, display_slurm_queue, search_log 
 
 from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.model_selection import train_test_split
@@ -17,6 +16,11 @@ from DCAM import *
 from tqdm import tqdm
 import pickle
 
+
+# import device (cpu or cuda). 
+#Default is cuda (for gpu server). 
+#Please change file setting variabel DEVICE to change server type
+from setting import DEVICE
 
 ##### DATA PREPROCESSING ######
 # - Scripts related to data and input preprocessing
@@ -195,7 +199,7 @@ if __name__ == '__main__':
 	parameters['nb_epoch'] = int(sys.argv[4])
 	parameters['nb_repeat_iteration'] = int(sys.argv[5])
 	
-	device = 'cuda'
+	device = DEVICE
 	for target_length in [500]:
 		for target_k in [1,2,5,10,20,50,100,200,500,1000]:
 			exec_model(model_name,type_input,dataset_name,parameters,target_length,target_k)

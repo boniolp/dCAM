@@ -26,6 +26,11 @@ from tqdm import tqdm
 import pickle
 
 
+# import device (cpu or cuda). 
+#Default is cuda (for gpu server). 
+#Please change file setting variabel DEVICE to change server type
+from setting import DEVICE
+
 ##### DATA PREPROCESSING ######
 # - Scripts related to data and input preprocessing
 
@@ -255,6 +260,6 @@ if __name__ == '__main__':
 	parameters['train_test_r'] = float(sys.argv[4])
 	
 	
-	device = 'cuda'
+	device = DEVICE
 
 	exec_model(model_name,type_input,dataset_name,parameters)

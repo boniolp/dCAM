@@ -16,6 +16,11 @@ from tqdm import tqdm
 import pickle
 
 
+# import device (cpu or cuda). 
+#Default is cuda (for gpu server). 
+#Please change file setting variabel DEVICE to change server type
+from setting import DEVICE
+
 ##### DATA PREPROCESSING ######
 # - Scripts related to data and input preprocessing
 
@@ -278,7 +283,7 @@ if __name__ == '__main__':
 		for name in tqdm(dataset_names): 
 			dataset_name = '../../../data/synthetic/{}'.format(name)
 
-			device='cpu'
+			device=DEVICE
 			
 			# Parameter in papers and for the results depicted in the paper
 			#parameters = {

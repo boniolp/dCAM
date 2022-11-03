@@ -35,7 +35,7 @@ if __name__ == '__main__':
 				
 			dataset_name = '../../../data/synthetic/{}'.format(name)
 			
-			device='cuda'
+			
 			
 			# Parameter to test the code
 			parameters = {

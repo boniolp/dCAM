@@ -40,7 +40,6 @@ if __name__ == '__main__':
 			
 		dataset_name = '../../../data/UCR_UEA/{}'.format(name)
 
-		device='cuda'
 				
 		# Parameter in papers and for the results depicted in the paper
 		#parameters = {

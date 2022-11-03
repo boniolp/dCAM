@@ -64,6 +64,13 @@ wget https://drive.google.com/file/d/1k4HcTSVc-WnuACjJs9KZ0MDwCzOvv3Lw/view?usp=
 All python packages needed are listed in [requirements.txt](https://github.com/boniolp/dCAM/blob/main/requirements.txt) file and can be installed simply using the pip command: 
 
 ```(bash) 
+pip install -r requirements_version.txt
+``` 
+
+If the version are not compatible in your environement, please run the following command:
+
+
+```(bash) 
 pip install -r requirements.txt
 ``` 
 

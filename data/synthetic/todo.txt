@@ -1,3 +1,3 @@
-download and store here the following datasets:
+download, unzip and store here the following datasets:
 
 url: https://drive.google.com/file/d/1k4HcTSVc-WnuACjJs9KZ0MDwCzOvv3Lw/view?usp=sharing 

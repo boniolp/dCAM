@@ -71,7 +71,7 @@ If the version are not compatible in your environement, please run the following
 
 
 ```(bash) 
-pip install -r requirements_version.txt
+pip install -r requirements.txt
 ``` 
 
 [Jupyter notebook](https://jupyter.org/install) should be installed. To do so, please run the following command:

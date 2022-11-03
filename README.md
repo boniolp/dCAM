@@ -51,21 +51,25 @@ The code is divided as follows:
 
 First, to download the datasets (unzip and move the content in the corresponding folder), please run the following commands:
 
+- Go to the following folder:
+
 ```(bash) 
 cd data/UCR_UEA
 ```
 
-Download and unzip the following archive:
+- Download and unzip the following archive:
 
 ```(bash) 
 https://drive.google.com/file/d/1SLeIZf_C3Yf7mF_ZLErpY2k8kpkEsxoD/view?usp=sharing
 ```
 
+- Then, go to the following folder:
+
 ```(bash) 
 cd data/synthetic
 ```
 
-Download and unzip the following archive:
+- Download and unzip the following archive:
 
 ```(bash) 
 https://drive.google.com/file/d/1k4HcTSVc-WnuACjJs9KZ0MDwCzOvv3Lw/view?usp=sharing 

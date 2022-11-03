@@ -49,16 +49,26 @@ The code is divided as follows:
 
 ## Prerequisites
 
-First, to download the datasets (unzip the move the content in the corresponding folder), please run the following commands:
+First, to download the datasets (unzip and move the content in the corresponding folder), please run the following commands:
 
 ```(bash) 
 cd data/UCR_UEA
-wget https://drive.google.com/file/d/1SLeIZf_C3Yf7mF_ZLErpY2k8kpkEsxoD/view?usp=sharing
+```
+
+Download and unzip the following archive:
+
+```(bash) 
+https://drive.google.com/file/d/1SLeIZf_C3Yf7mF_ZLErpY2k8kpkEsxoD/view?usp=sharing
 ```
 
 ```(bash) 
 cd data/synthetic
-wget https://drive.google.com/file/d/1k4HcTSVc-WnuACjJs9KZ0MDwCzOvv3Lw/view?usp=sharing 
+```
+
+Download and unzip the following archive:
+
+```(bash) 
+https://drive.google.com/file/d/1k4HcTSVc-WnuACjJs9KZ0MDwCzOvv3Lw/view?usp=sharing 
 ```
 
 All python packages needed are listed in [requirements.txt](https://github.com/boniolp/dCAM/blob/main/requirements.txt) file and can be installed simply using the pip command: 

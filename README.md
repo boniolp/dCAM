@@ -60,7 +60,7 @@ cd data/UCR_UEA
 - Download and unzip the following archive:
 
 ```(bash) 
-https://drive.google.com/file/d/1SLeIZf_C3Yf7mF_ZLErpY2k8kpkEsxoD/view?usp=sharing
+https://helios2.mi.parisdescartes.fr/~themisp/dCAM/data/UCR_UEA_datasets.zip
 ```
 
 - Then, go to the following folder:
@@ -72,7 +72,7 @@ cd data/synthetic
 - Download and unzip the following archive:
 
 ```(bash) 
-https://drive.google.com/file/d/1k4HcTSVc-WnuACjJs9KZ0MDwCzOvv3Lw/view?usp=sharing 
+https://helios2.mi.parisdescartes.fr/~themisp/dCAM/data/Synthetic_datasets.zip
 ```
 
 All python packages needed are listed in [requirements.txt](https://github.com/boniolp/dCAM/blob/main/requirements.txt) file and can be installed simply using the pip command: 

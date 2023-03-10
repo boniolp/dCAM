@@ -1,14 +1,30 @@
-# dCAM : Dimension-wise Class Activation Map for Explaining Multivariate Time Series Classification
-
 <p align="center">
-<img src="ressources/intro_figure.png" alt="drawing" width="400"/>
+<img width="190" src="./ressources/dCAM_logo.png"/>
 </p>
+
+
+<h1 align="center">dCAM</h1>
+<h2 align="center">Dimension-wise Class Activation Map for Explaining Multivariate Time Series Classification</h2>
+
+<div align="center">
+<p>
+<img alt="GitHub" src="https://img.shields.io/github/license/boniolp/dCAM"> <img alt="GitHub issues" src="https://img.shields.io/github/issues/boniolp/dCAM">
+</p>
+</div>
+
 
 ## Abstract
 
 Data series classification is an important and challenging problem in data science. Explaining the classification decisions by finding the discriminant parts of the input that led the algorithm to some decision is a real need in many applications. Convolutional neural networks perform well for the data series classification task; though,the explanations provided by this type of algorithms are poor for the specific case of multivariate data series. Solving this important limitation is a significant challenge. We propose a novel method that addresses the above challenge by highlighting both the temporal and dimensional discriminant information. Our contribution is two-fold: we first describe a new convolutional architecture that enables the comparison of dimensions; then, we propose a novel method that returns dCAM, a Dimension-wise ClassActivation Map specifically designed for multivariate time series. 
 
+
+<p align="center">
+<img src="ressources/intro_figure.png" alt="drawing" width="400"/>
+</p>
+
 This repository is dedicated to [our paper](https://dl.acm.org/doi/abs/10.1145/3514221.3526183) titled "dCAM : Dimension-wise Class Activation Map for Explaining Multivariate Time Series Classification" published in the [Proceedings of the 2022 International Conference on Management of Data](https://dl.acm.org/doi/proceedings/10.1145/3514221) also available on [here](https://www.researchgate.net/publication/361416963_dCAM_Dimension-wise_Class_Activation_Map_for_Explaining_Multivariate_Data_Series_Classification).
+
+
 
 ## Data 
 The data used in this project comes from two sources: 

@@ -540,7 +540,7 @@ def conv2d_same_padding(input, weight, bias, stride, dilation, groups):
 		if padding % 2 != 0:
 				input = F.pad(input, [0, 1])
 
-		return F.conv1d(input=input, weight=weight, bias=bias, stride=stride,
+		return F.conv2d(input=input, weight=weight, bias=bias, stride=stride,
 										padding=(0,padding // 2),
 										dilation=dilation, groups=groups)
 

@@ -24,6 +24,12 @@ Data series classification is an important and challenging problem in data scien
 
 This repository is dedicated to [our paper](https://dl.acm.org/doi/abs/10.1145/3514221.3526183) titled "dCAM : Dimension-wise Class Activation Map for Explaining Multivariate Time Series Classification" published in the [Proceedings of the 2022 International Conference on Management of Data](https://dl.acm.org/doi/proceedings/10.1145/3514221) also available on [here](https://www.researchgate.net/publication/361416963_dCAM_Dimension-wise_Class_Activation_Map_for_Explaining_Multivariate_Data_Series_Classification).
 
+## dCAM in Practice:
+
+Here are interesting papers that use dCAM.
+
+- Linhao Fan et al. [An Explainable Machine Learning Based Flashover Prediction Model Using Dimension-Wise Class Activation Map](https://www.researchgate.net/publication/371868698_An_Explainable_Machine_Learning_Based_Flashover_Prediction_Model_Using_Dimension-Wise_Class_Activation_Map), Fire Safety Journal, 2023
+
 
 
 ## Data 

@@ -69,7 +69,7 @@ class ModelCNN():
 
 		def train(self,num_epochs,dataloader_cl1,dataloader_cl1_test,model_name='model',verbose=True):
 				epochs_no_improve = 0
-				min_val_loss = np.Inf
+				min_val_loss = np.inf
 				loss_train_history = []
 				loss_test_history = []
 				accuracy_test_history = []

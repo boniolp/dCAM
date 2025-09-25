@@ -1,8 +1,0 @@
-tqdm
-torch
-pandas
-numpy
-scikit_learn
-matplotlib
-torchsummary
-scipy

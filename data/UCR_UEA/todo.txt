@@ -1,3 +1,3 @@
 download, unzip and store here the following datasets:
 
-url: https://drive.google.com/file/d/1SLeIZf_C3Yf7mF_ZLErpY2k8kpkEsxoD/view?usp=sharing
+url: https://helios2.mi.parisdescartes.fr/~themisp/dCAM/data/UCR_UEA_datasets.zip

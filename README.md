@@ -97,13 +97,35 @@ cd data/synthetic
 https://helios2.mi.parisdescartes.fr/~themisp/dCAM/data/Synthetic_datasets.zip
 ```
 
-All python packages needed are listed in [requirements.txt](https://github.com/boniolp/dCAM/blob/main/requirements.txt) file and can be installed simply using the pip command: 
+### Python environment management with uv
+
+We recommend using [uv](https://docs.astral.sh/uv) to manage the Python environment defined in `pyproject.toml`/`uv.lock`.
+
+```bash
+# Install uv if you do not already have it
+curl -Ls https://astral.sh/uv/install.sh | sh
+
+# Create a .venv/
+uv venv
+
+# Install the project into a virtual environment (created at .venv/)
+uv sync
+
+# Activate the environment when you want to work on the project
+source .venv/bin/activate
+```
+
+Once the environment is active you can launch notebooks or scripts with `uv run <command>` (for example `uv run jupyter notebook`).
+
+### Alternative: pip
+
+All python packages needed are listed in [requirements.txt](https://github.com/boniolp/dCAM/blob/main/requirements.txt) and can be installed simply using the pip command: 
 
 ```(bash) 
 pip install -r requirements_version.txt
 ``` 
 
-If the version are not compatible in your environement, please run the following command:
+If the versions are not compatible in your environement, please run the following command:
 
 
 ```(bash) 

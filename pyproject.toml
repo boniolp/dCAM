@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=66", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dcam"
+version = "0.1.0"
+description = "Dimension-wise Class Activation Map for explaining multivariate time series classification"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+authors = [{name = "Paul Boniol"}]
+dependencies = [
+    "tqdm",
+    "torch",
+    "pandas",
+    "numpy",
+    "scikit-learn",
+    "matplotlib",
+    "torchsummary",
+    "scipy",
+    "pip>=25.0.1",
+    "ipykernel>=6.29.5",
+    "notebook>=7.3.3",
+]
+
+[project.urls]
+Homepage = "https://github.com/boniolp/dcam"
+Repository = "https://github.com/boniolp/dcam"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,3 @@
+# Ignore serialized synthetic datasets
+*.pickle
+*.zip

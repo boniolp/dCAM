@@ -1,0 +1,3 @@
+# Ignore serialized UCR/UEA datasets
+*.pickle
+*.zip
